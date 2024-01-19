@@ -1,4 +1,4 @@
-import { createTableRow } from "./js/create-table-row.js";
+import { createTableRow } from "./create-table-row.js";
 
 export const renderOriginalTable = (originalUserData) => {
 
