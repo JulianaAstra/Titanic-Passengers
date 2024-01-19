@@ -1,0 +1,134 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 100%;
+}
+
+body {
+  background-image: url("");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: right;
+  padding: 50px;
+}
+
+.page-header {
+  padding: 1.4rem;
+}
+
+.page-header__title {
+  margin: 0;
+  font-weight: 900;
+  font-size: 3.4rem;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+/* ~~~~~~~~~~~~ Главная ~~~~~~~~~~~~ */
+
+.search-bar {
+  position: relative;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  background: rgba(241, 235, 230, 0.95);
+  color: #000000;
+}
+
+/* ~~~~~~~~~~~~ Кинозал ~~~~~~~~~~~~ */
+.acception-button {
+  display: block;
+  margin: 3rem auto 0;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.24), 0px 0px 3px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  border: none;
+  padding: 12px 57px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.4rem;
+  background-color: #16A6AF;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+
+
+.conf-step__chair_standart {
+  background-color: #FFFFFF;
+}
+
+.conf-step__chair_vip {
+  background-color: #F9953A;
+}
+
+.conf-step__chair_taken {
+  background-color: transparent;
+}
+
+.conf-step__chair_selected {
+  background-color: #25C4CE;
+  box-shadow: 0px 0px 4px #16A6AF;
+  transform: scale(1.2);
+}
+
+
+
+@media screen and (min-width: 479px) {
+  .page-nav .page-nav__day {
+    padding: 1rem 2rem;
+  }
+}
+@media screen and (min-width: 990px) {
+  .page-header, nav, main {
+    width: 990px;
+    margin: auto;
+  }
+
+  .movie, .buying {
+    border-radius: 2px;
+  }
+
+  .buying__info-hint {
+    display: none;
+  }
+}
+
+/*================================================================*/
+
+
+
+#userDataTable {
+  width: 100%;
+}
+
+.search-bar {
+  text-align: right;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+
+}
+
+/* Стилизация ячеек таблицы */
+td {
+  border: 1px solid #ddd; /* Стиль границы */
+  padding: 8px; /* Отступ внутри ячейки */
+}
+
+/* Стилизация строк таблицы */
+tr {
+  border: 1px solid #ddd; /* Стиль границы */
+}
+
+/* Стилизация строк таблицы, которые содержат ячейки с colspan */
+tr[colspan] {
+  border-top: none; /* Убираем верхнюю границу для строк с colspan */
+  border-bottom: 1px solid #ddd; /* Добавляем нижнюю границу для строк с colspan */
+}
