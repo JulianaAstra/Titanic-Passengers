@@ -53,6 +53,10 @@ body {
   color: #02191b;
 }
 
+#searchInput:focus {
+  outline: none;
+}
+
 .submitInput,
 .resetInput {
   margin: 0.3rem;
