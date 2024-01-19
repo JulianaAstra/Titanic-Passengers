@@ -4,7 +4,9 @@ import { BASE_URL } from "./constants.js";
 export const fetchData = async () => {
 
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(BASE_URL, {
+      method: 'GET',
+    })
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data. Status: ${response.status}`);
