@@ -1,40 +1,61 @@
-import { renderOriginalTable } from "./render-original-table.js";
 import { searchTable } from "./search-table.js";
 import { resetTable } from "./reset-table.js";
 import { fetchData } from "./service.js";
+import { renderOriginalTable } from "./render-original-table.js";
+import { RenderRange } from "./constants.js";
 
-let originalTableHTML = '';
+const data = await fetchData();
 const form = document.querySelector('.searchForm');
-const loadMoreBtn = document.querySelector('.load_more_btn');
-let start = 0;
-let limit = 10;
 
-function loadData() {
-   const end = start + limit;
-   fetchData()
-   .then(data => {
-    if (start >= data.length) {
-      loadMoreBtn.style.display = 'none';
-       }
-    originalTableHTML = renderOriginalTable(data.slice(start, end))
-    start = end;
-   })
-    .catch(error => console.error('Error:', error));
+let start = RenderRange.START;
+let limit = RenderRange.LIMIT;
+let newArray;
+
+if (!data) {
+
+  console.log('no data');
 }
 
-loadMoreBtn.addEventListener('click', loadData);
+export const renderTable = (datum) => {
 
-window.addEventListener('load', () => {
- loadData();
-})
+  const end = start + limit;
+  renderOriginalTable(datum.slice(start, end));
+  start = end;
+  }
+
+const handleBaseScroll = () => {
+
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    renderTable(data);
+  }
+}
+
+function handleSearchScroll() {
+
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    renderTable(newArray);
+  }
+}
 
 form.addEventListener('submit', (evt) => {
+
   evt.preventDefault();
-  searchTable();
+  window.removeEventListener('scroll', handleBaseScroll);
+  start = 0;
+  window.addEventListener('scroll', handleSearchScroll);
+  newArray = searchTable(data);
 })
 
 form.addEventListener('reset', (evt) => {
+  
   evt.preventDefault();
-  resetTable(originalTableHTML);
+  start = 0;
+  window.removeEventListener('scroll', handleSearchScroll);
+  window.addEventListener('scroll', handleBaseScroll);
+  resetTable(data);
 })
+
+window.addEventListener('scroll', handleBaseScroll);
+
+renderTable(data);
 

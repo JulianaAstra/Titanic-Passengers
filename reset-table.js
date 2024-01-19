@@ -1,4 +1,8 @@
-export const resetTable = (originalTableHTML) => {
-    document.getElementById('userDataTable').innerHTML = originalTableHTML;
+import { renderTable } from "./index.js";
+
+export const resetTable = (data) => {
+
+    document.querySelector('tbody').innerHTML = '';
     document.getElementById('searchInput').value = '';
-  };
+    renderTable(data);
+};

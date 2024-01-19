@@ -1,14 +1,22 @@
-export const searchTable = () => {
+import { renderTable } from "./index.js";
 
-    const searchText = document.getElementById('searchInput').value.toLowerCase();
-    const rows = document.querySelectorAll('#userDataTable tbody tr');
+export const searchTable = (data) => {
+  
+  const searchText = document.getElementById('searchInput').value;
 
-    rows.forEach(row => {
-      const rowData = row.textContent.toLowerCase();
-      if (rowData.includes(searchText)) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
+  const newArray = data.filter((elem) => {
+    for (const key in elem) {
+      if (Object.prototype.hasOwnProperty.call(elem, key)) {
+        const value = String(elem[key]);
+        if (value.includes(searchText)) {
+          return true; 
+        }
       }
-    });
-  };
+    }
+    return false; 
+  })
+
+  document.querySelector('tbody').innerHTML = '';
+  renderTable(newArray);
+  return newArray;
+};

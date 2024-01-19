@@ -1,41 +1,32 @@
 import { calculateAgeInMonths } from "./convert-age.js";
-
-let originalTableHTML;
+import { BASE_URL } from "./constants.js";
 
 export const fetchData = async () => {
 
-    const url = 'https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json';
-  
-    try {
-      const response = await fetch(url);
-  
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data. Status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      const dataSliced = data.slice(0, 100);
-      const transformedData = dataSliced.map(passenger => {
-        return {
-          ...passenger,
-          age: passenger.age >= 1 ? `${Math.floor(passenger.age)}y` : `${calculateAgeInMonths(passenger.age)}months`,
-          survived: passenger.survived ? 'SURVIVED' : 'NOT SURVIVED',
-          gender: passenger.gender === 'female' ? 'F' : passenger.gender === 'male' ? 'M' : passenger.gender,
-          cabin: `cabin: ${passenger.cabin}`,
-          ticket: `ticket: ${passenger.ticket}`,
-        };
-      });
+  try {
+    const response = await fetch(BASE_URL);
 
-      return transformedData;
-      
-    } catch (error) {
-      console.error('Error fetching data:', error.message);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data. Status: ${response.status}`);
     }
-  };
-  
-  export const saveOriginalTableHTML = (tableBodyHTML) => {
-    if (!originalTableHTML) {
-      originalTableHTML = tableBodyHTML;
-    }
-  };
+
+    const data = await response.json();
+
+    const transformedData = data.map(passenger => {
+      return {
+        name: passenger.name,
+        age: passenger.age >= 1 ? `${Math.floor(passenger.age)}y` : `${calculateAgeInMonths(passenger.age)}months`,
+        survived: passenger.survived ? 'SURVIVED' : 'NOT SURVIVED',
+        gender: passenger.gender === 'female' ? 'F' : passenger.gender === 'male' ? 'M' : passenger.gender,
+        cabin: `cabin: ${passenger.cabin}`,
+        ticket: `ticket: ${passenger.ticket}`,
+      };
+    });
+
+    return transformedData;
+    
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+    throw error;
+  }
+};
