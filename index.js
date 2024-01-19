@@ -3,37 +3,43 @@ import { resetTable } from "./reset-table.js";
 import { fetchData } from "./service.js";
 import { renderOriginalTable } from "./render-original-table.js";
 import { RenderRange } from "./constants.js";
+import { errorScreen } from "./error-screen.js";
 
-const data = await fetchData();
+const tableBodyElement = document.querySelector('tbody');
 const form = document.querySelector('.searchForm');
+let passengersList = [];
+
+await fetchData()
+  .then((data) => {
+    passengersList = data;
+  })
+  .catch((error) => {
+    console.log(error)
+    tableBodyElement.innerHTML = errorScreen();
+  });
 
 let start = RenderRange.START;
 let limit = RenderRange.LIMIT;
-let newArray;
+let filteredPassengersList;
 
-if (!data) {
-
-  console.log('no data');
-}
-
-export const renderTable = (datum) => {
+export const renderTable = (passengers) => {
 
   const end = start + limit;
-  renderOriginalTable(datum.slice(start, end));
+  renderOriginalTable(passengers.slice(start, end));
   start = end;
-  }
+}
 
 const handleBaseScroll = () => {
 
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    renderTable(data);
+    renderTable(passengersList);
   }
 }
 
 function handleSearchScroll() {
 
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    renderTable(newArray);
+    renderTable(filteredPassengersList);
   }
 }
 
@@ -43,19 +49,20 @@ form.addEventListener('submit', (evt) => {
   window.removeEventListener('scroll', handleBaseScroll);
   start = 0;
   window.addEventListener('scroll', handleSearchScroll);
-  newArray = searchTable(data);
+  newArray = searchTable(passengersList);
 })
 
 form.addEventListener('reset', (evt) => {
-  
+
   evt.preventDefault();
+  window.scrollTo(0, 0);
   start = 0;
   window.removeEventListener('scroll', handleSearchScroll);
   window.addEventListener('scroll', handleBaseScroll);
-  resetTable(data);
+  resetTable(passengersList);
 })
 
 window.addEventListener('scroll', handleBaseScroll);
 
-renderTable(data);
+renderTable(passengersList);
 

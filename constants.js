@@ -2,7 +2,7 @@ export const BASE_URL = 'https://raw.githubusercontent.com/altkraft/for-applican
 
 export const RenderRange = {
     START: 0,
-    LIMIT: 4
+    LIMIT: 6
 }
 
 export const MONTHS_IN_YEAR = 12;

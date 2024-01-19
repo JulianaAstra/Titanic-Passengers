@@ -16,6 +16,8 @@ body {
   background-attachment: fixed;
   background-position: right;
   padding: 50px;
+  overflow-y: scroll;
+  min-height: 110vh;
 }
 
 .page-header {
@@ -30,14 +32,41 @@ body {
   text-transform: uppercase;
 }
 
-/* ~~~~~~~~~~~~ Главная ~~~~~~~~~~~~ */
+.page-header__title span{
+  font-weight: 100;
+  background-color: #16A6AF;
+  color: #ffffff;
+}
 
 .search-bar {
   position: relative;
   padding: 1.5rem;
   margin-top: 3rem;
-  background: rgba(241, 235, 230, 0.95);
+  background: #046e6948;
   color: #000000;
+}
+
+#searchInput {
+  width: 18rem;
+  height: 1.7rem;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.24), 0px 0px 3px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  border: none;
+}
+
+.submitInput,
+.resetInput {
+  margin: 0.3rem;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.24), 0px 0px 3px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  border: none;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.9rem;
+  background-color: #16A6AF;
+  color: #FFFFFF;
+  cursor: pointer;
 }
 
 /* ~~~~~~~~~~~~ Кинозал ~~~~~~~~~~~~ */
@@ -118,7 +147,7 @@ table {
 
 /* Стилизация ячеек таблицы */
 td {
-  border: 1px solid #ddd; /* Стиль границы */
+  border-bottom: 1px solid #ddd; /* Стиль границы */
   padding: 8px; /* Отступ внутри ячейки */
 }
 
@@ -131,4 +160,12 @@ tr {
 tr[colspan] {
   border-top: none; /* Убираем верхнюю границу для строк с colspan */
   border-bottom: 1px solid #ddd; /* Добавляем нижнюю границу для строк с colspan */
+}
+
+.error {
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #000000;
+  text-transform: uppercase;
 }

@@ -26,7 +26,6 @@ export const fetchData = async () => {
     return transformedData;
     
   } catch (error) {
-    console.error('Error fetching data:', error.message);
     throw error;
   }
 };
