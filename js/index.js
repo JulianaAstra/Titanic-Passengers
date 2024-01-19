@@ -49,7 +49,7 @@ form.addEventListener('submit', (evt) => {
   window.removeEventListener('scroll', handleBaseScroll);
   start = 0;
   window.addEventListener('scroll', handleSearchScroll);
-  newArray = searchTable(passengersList);
+  filteredPassengersList = searchTable(passengersList);
 })
 
 form.addEventListener('reset', (evt) => {
