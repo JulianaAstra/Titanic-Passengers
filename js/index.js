@@ -28,7 +28,7 @@ export const renderTable = (passengers) => {
   start = end;
 }
 
-const handleBaseScroll = () => {
+function handleBaseScroll() {
 
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     renderTable(passengersList);
@@ -51,15 +51,15 @@ form.addEventListener('submit', (evt) => {
   filteredPassengersList = searchTable(passengersList);
 })
 
-form.addEventListener('reset', (evt) => {
+// form.addEventListener('reset', (evt) => {
 
-  evt.preventDefault();
-  window.scrollTo(0, 0);
-  start = 0;
-  window.removeEventListener('scroll', handleSearchScroll);
-  window.addEventListener('scroll', handleBaseScroll);
-  resetTable(passengersList);
-})
+//   evt.preventDefault();
+//   window.scrollTo(0, 0);
+//   start = 0;
+//   window.removeEventListener('scroll', handleSearchScroll);
+//   window.addEventListener('scroll', handleBaseScroll);
+//   resetTable(passengersList);
+// })
 
 window.addEventListener('scroll', handleBaseScroll);
 
