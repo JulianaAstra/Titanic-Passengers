@@ -14,7 +14,6 @@ await fetchData()
     passengersList = data;
   })
   .catch((error) => {
-    console.log(error)
     tableBodyElement.innerHTML = errorScreen();
   });
 
